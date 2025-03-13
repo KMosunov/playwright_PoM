@@ -1,20 +1,24 @@
 import { Locator, Page } from '@playwright/test'
 import { OrderPage } from './order-page'
 import { SERVICE_URL } from '../../config/env-data'
+import { Input } from '../atoms/Input'
+import { Button } from '../atoms/Button'
+import { BasePage } from './base-page'
 
-export class LoginPage {
-  readonly page: Page
+export class LoginPage extends BasePage{
   readonly url: string = SERVICE_URL
-  readonly signInButton: Locator
-  readonly usernameField: Locator
-  readonly passwordField: Locator
+  readonly signInButton: Button
+  readonly usernameField: Input
+  readonly passwordField: Input
+  readonly authErrorPopup: Locator
   // add more locators here
 
   constructor(page: Page) {
-    this.page = page
-    this.signInButton = page.getByTestId('signIn-button')
-    this.usernameField = page.getByTestId('username-input')
-    this.passwordField = page.getByTestId('password-input')
+    super(page)
+    this.signInButton = new Button(this.page,'[data-name=signIn-button]')//page.getByTestId('signIn-button')
+    this.usernameField = new Input(this.page, '[data-name=username-input]')
+    this.passwordField = new Input(this.page, '[data-name=password-input]')
+    this.authErrorPopup = page.locator( '[data-name="authorizationError-popup"]')
     // continue with the rest of the implementation below
   }
 
@@ -23,6 +27,8 @@ export class LoginPage {
   }
 
   async signIn(username: string, password: string) {
+    await this.usernameField.checkVisible()
+    await this.passwordField.checkVisible()
     await this.usernameField.fill(username)
     await this.passwordField.fill(password)
     await this.signInButton.click()
