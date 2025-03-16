@@ -1,9 +1,9 @@
 import { test } from '@playwright/test'
-import { LoginPage } from '../pages/login-page'
+import { LoginPage } from './pages/login-page'
 import { faker } from '@faker-js/faker/locale/ar'
-import { PASSWORD, USERNAME } from '../../config/env-data'
-import { OrderNotFoundPage } from '../pages/order-not-found'
-import { OrderDetails } from '../pages/order-details'
+import { PASSWORD, USERNAME } from '../config/env-data'
+import { OrderNotFoundPage } from './pages/order-not-found'
+import { OrderDetails } from './pages/order-details'
 
 let loginPage: LoginPage
 
@@ -66,7 +66,7 @@ test('TL-18-5 Check order not found', async ({ page }) => {
   await orderNotFoundPage.checkNotFoundTitle()
 })
 
-test('TL-18-5 Check order details', async ({ page }) => {
+test('TL-18-6 Check order details', async ({ page }) => {
   const orderDetails = new OrderDetails(page)
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
   await orderPage.statusButton.click()
@@ -76,7 +76,7 @@ test('TL-18-5 Check order details', async ({ page }) => {
   await orderDetails.checkStatusDescription()
 })
 
-test('TL-18-6 Check footer on login page', async () => {
+test('TL-18-7 Check footer on login page', async () => {
   await loginPage.checkFooterAttached()
   await loginPage.langButtonRu.checkVisible()
   await loginPage.langButtonEn.checkVisible()
@@ -85,7 +85,7 @@ test('TL-18-6 Check footer on login page', async () => {
   await loginPage.tosLink.checkVisible()
 })
 
-test('TL-18-7 Check footer on order page', async () => {
+test('TL-18-8 Check footer on order page', async () => {
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
   await orderPage.checkFooterAttached()
   await orderPage.langButtonRu.checkVisible()
@@ -95,7 +95,7 @@ test('TL-18-7 Check footer on order page', async () => {
   await orderPage.tosLink.checkVisible()
 })
 
-test('TL-18-3 Check footer on order not found page', async ({ page }) => {
+test('TL-18-9 Check footer on order not found page', async ({ page }) => {
   const loginPage = new LoginPage(page)
   const notFoundPage = new OrderNotFoundPage(page)
 
