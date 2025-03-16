@@ -42,7 +42,7 @@ test('TL-18-3 Login with correct credentials and verify order creation page', as
   await orderPage.logOutButton.checkDisabled(false)
 })
 
-test('TL-18-4 Check order creation', async ({ page }) => {
+test('TL-18-4 Check order creation', async () => {
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
   await orderPage.nameField.fill(faker.internet.username())
   await orderPage.phoneField.fill(faker.phone.number())
@@ -76,7 +76,7 @@ test('TL-18-5 Check order details', async ({ page }) => {
   await orderDetails.checkStatusDescription()
 })
 
-test('TL-18-6 Check footer on login page', async ({ page }) => {
+test('TL-18-6 Check footer on login page', async () => {
   await loginPage.checkFooterAttached()
   await loginPage.langButtonRu.checkVisible()
   await loginPage.langButtonEn.checkVisible()
@@ -85,7 +85,7 @@ test('TL-18-6 Check footer on login page', async ({ page }) => {
   await loginPage.tosLink.checkVisible()
 })
 
-test('TL-18-7 Check footer on order page', async ({ page }) => {
+test('TL-18-7 Check footer on order page', async () => {
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
   await orderPage.checkFooterAttached()
   await orderPage.langButtonRu.checkVisible()
