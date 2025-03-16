@@ -16,7 +16,7 @@ export class Popup {
   async checkErrorAuthText(): Promise<void> {
     await expect(this.popupLocator).toContainText('Incorrect credentials')
   }
-    async orderCreatedPopupText(): Promise<void> {
-      await expect (this.popupLocator).toContainText('Order has been created!')
-    }
+  async orderCreatedPopupText(): Promise<void> {
+    await expect(this.popupLocator).toContainText('Order has been created!')
+  }
 }

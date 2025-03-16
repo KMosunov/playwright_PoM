@@ -12,5 +12,4 @@ export class OrderNotFoundPage extends BasePage {
     await expect(this.notFoundTitle).toBeVisible()
     await expect(this.notFoundTitle).toHaveText('Order not found')
   }
-
 }

@@ -14,6 +14,6 @@ export class Link {
   }
 
   async click(): Promise<void> {
-    await this.linkLocator.click();
+    await this.linkLocator.click()
   }
 }

@@ -1,6 +1,5 @@
 import { Locator, Page } from '@playwright/test'
 
-
 export class BaseModal {
   readonly page: Page
   readonly closeButton: Locator
@@ -9,5 +8,4 @@ export class BaseModal {
     this.page = page
     this.closeButton = page.locator(selector)
   }
-
 }

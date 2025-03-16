@@ -13,10 +13,8 @@ export class Input {
     await expect(this.inputLocator).toBeVisible()
   }
 
-  async fill(value:string): Promise<void> {
-    await this.inputLocator.clear();
-    await this.inputLocator.fill(value);
+  async fill(value: string): Promise<void> {
+    await this.inputLocator.clear()
+    await this.inputLocator.fill(value)
   }
-
-
 }
