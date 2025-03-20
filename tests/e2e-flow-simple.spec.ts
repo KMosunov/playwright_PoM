@@ -67,7 +67,7 @@ test('TL-18-5 Check order not found', async ({ page }) => {
   await orderNotFoundPage.checkNotFoundTitle()
 })
 
-test.only('TL-18-6 Check order details using ID from const', async ({ page }) => {
+test('TL-18-6 Check order details using ID from const', async ({ page }) => {
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
   const orderDetails = new OrderDetails(page)
 
