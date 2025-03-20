@@ -54,6 +54,7 @@ test('TL-18-4 Check order creation', async () => {
   await orderPage.orderCreatedOkButton.click()
   await orderPage.orderCreatedOkButton.checkDisabled(false)
 })
+
 test('TL-18-5 Check order not found', async ({ page }) => {
   const orderNotFoundPage = new OrderNotFoundPage(page)
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
@@ -66,11 +67,26 @@ test('TL-18-5 Check order not found', async ({ page }) => {
   await orderNotFoundPage.checkNotFoundTitle()
 })
 
-test('TL-18-6 Check order details', async ({ page }) => {
-  const orderDetails = new OrderDetails(page)
+test.only('TL-18-6 Check order details using ID from const', async ({ page }) => {
   const orderPage = await loginPage.signIn(USERNAME, PASSWORD)
+  const orderDetails = new OrderDetails(page)
+
+  await orderPage.nameField.fill(faker.internet.username())
+  await orderPage.phoneField.fill(faker.phone.number())
+  await orderPage.commentField.fill(faker.word.words(5))
+  const ordersResponse = orderPage.page.waitForResponse((response) =>
+    response.request().url().includes('orders'),
+  )
+  await orderPage.createOrderButton.click()
+  await ordersResponse
+  await orderPage.orderCreatedModal.checkVisible()
+  await orderPage.checkCreatedTitle()
+  await orderPage.checkTrackCodeText()
+  const id = await orderPage.getOrderNumber()
+  await orderPage.orderCreatedOkButton.click()
   await orderPage.statusButton.click()
-  await orderPage.orderNumberField.fill('5902')
+
+  await orderPage.orderNumberField.fill(`${id}`)
   await orderPage.trackButton.click()
   await orderDetails.checkOrderStatus()
   await orderDetails.checkStatusDescription()

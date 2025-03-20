@@ -17,4 +17,9 @@ export class Input {
     await this.inputLocator.clear()
     await this.inputLocator.fill(value)
   }
+
+  // async fillString(value: string): Promise<void> {
+  //   await this.inputLocator.clear()
+  //   await this.inputLocator.pressSequentially(value)
+  // }
 }
